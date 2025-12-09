@@ -1,59 +1,50 @@
 <?php
+// use shared DB connection
+require 'db.php';
 
-$host     = "localhost";
-$user     = "root";
-$password = "";
-$dbname   = "wishkolang";
+$message = "";
 
-
-$conn = new mysqli($host, $user, $password, $dbname);
-
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $fullname      = $_POST['fullname'] ?? '';
-    $home_address  = $_POST['home_address'] ?? '';
-    $phone_number  = $_POST['phone_number'] ?? '';
-    $birth_date    = $_POST['birth_date'] ?? '';
-    $wishnimo      = $_POST['wishnimo'] ?? '';
+    $fullname      = trim($_POST['fullname'] ?? '');
+    $home_address  = trim($_POST['home_address'] ?? '');
+    $phone_number  = trim($_POST['phone_number'] ?? '');
+    $birth_date    = trim($_POST['birth_date'] ?? '');
+    $wishnimo      = trim($_POST['wishnimo'] ?? '');
 
     // Basic validation
-    if (empty($fullname) || empty($home_address) || empty($phone_number) || empty($birth_date) || empty($wishnimo)) {
+    if ($fullname === '' || $home_address === '' || $phone_number === '' || $birth_date === '' || $wishnimo === '') {
         $message = "All fields are required.";
     } else {
-        // 👍 Direct INSERT (no SQL function, simpler)
+
         $stmt = $conn->prepare("
             INSERT INTO wishkolangtbl (fullname, home_address, phone_number, birth_date, wishnimo)
             VALUES (?, ?, ?, ?, ?)
         ");
-        $stmt->bind_param("sssss", $fullname, $home_address, $phone_number, $birth_date, $wishnimo);
 
-        if ($stmt->execute()) {
-            $message = "Wish submitted successfully! ";
+        if ($stmt) {
+            $stmt->bind_param("sssss", $fullname, $home_address, $phone_number, $birth_date, $wishnimo);
+
+            if ($stmt->execute()) {
+                $message = "Wish submitted successfully!";
+            } else {
+                $message = "Failed to save wish. Please try again.";
+            }
+
+            $stmt->close();
         } else {
-            $message = "Error saving wish: " . $conn->error;
+            $message = "An error occurred. Please try again later.";
         }
-
-        $stmt->close();
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Wish Ko Lang</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+
+
 <body class="p-4">
 
 <div class="container">
-    <h5 class="card-title mb-3">Wish Ko Lang</h5>
+    <h5 class="card-title mb-3">Wish Ko Lang Form</h5>
 
     <?php if (!empty($message)): ?>
         <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>

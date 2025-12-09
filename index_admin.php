@@ -298,6 +298,16 @@
         </ul>
       </li><!-- End Tables Nav -->
 
+      <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="index_admin.php?page=wish_list">
+              <i class="bi bi-circle"></i><span>Wish List</span>
+            </a>
+          </li>
+         
+        </ul>
+      </li><!-- End Tables Nav -->
+
  
 
       <li class="nav-heading">Pages</li>
@@ -334,7 +344,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Noice Admin</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -368,6 +378,10 @@
 
           case 'wish':
           include 'modules/wish_form.php';
+          break;
+
+          case 'wish_list':
+          include 'modules/wish_list.php';
           break;
 
       }
