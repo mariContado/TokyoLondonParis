@@ -1,9 +1,9 @@
 <?php
-require 'db.php'; // include the database connection
+require 'db.php'; 
 
 $message = "";
 
-// Handle form submission
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $fullname      = trim($_POST['fullname'] ?? '');

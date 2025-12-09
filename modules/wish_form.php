@@ -1,10 +1,10 @@
 <?php
-// use shared DB connection
+
 require 'db.php';
 
 $message = "";
 
-// Handle form submission
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $fullname      = trim($_POST['fullname'] ?? '');
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birth_date    = trim($_POST['birth_date'] ?? '');
     $wishnimo      = trim($_POST['wishnimo'] ?? '');
 
-    // Basic validation
+
     if ($fullname === '' || $home_address === '' || $phone_number === '' || $birth_date === '' || $wishnimo === '') {
         $message = "All fields are required.";
     } else {
