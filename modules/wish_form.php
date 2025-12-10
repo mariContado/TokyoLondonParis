@@ -10,21 +10,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname      = trim($_POST['fullname'] ?? '');
     $home_address  = trim($_POST['home_address'] ?? '');
     $phone_number  = trim($_POST['phone_number'] ?? '');
+    $age = trim($_POST['age'] ?? '');
     $birth_date    = trim($_POST['birth_date'] ?? '');
     $wishnimo      = trim($_POST['wishnimo'] ?? '');
+    
 
 
-    if ($fullname === '' || $home_address === '' || $phone_number === '' || $birth_date === '' || $wishnimo === '') {
-        $message = "All fields are required.";
+    if ($fullname === '' || $home_address === '' || $phone_number === '' || 
+    $age === '' || $birth_date === '' || $wishnimo === '') {
+
+    $message = "All fields are required.";
+
+
     } else {
 
         $stmt = $conn->prepare("
-            INSERT INTO wishkolangtbl (fullname, home_address, phone_number, birth_date, wishnimo)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO wishkolangtbl (fullname, home_address, phone_number, age, birth_date, wishnimo)
+            VALUES (?, ?, ?, ?, ?, ?)
         ");
 
         if ($stmt) {
-            $stmt->bind_param("sssss", $fullname, $home_address, $phone_number, $birth_date, $wishnimo);
+            $stmt->bind_param("ssssss", $fullname, $home_address, $phone_number, $age, $birth_date, $wishnimo);
 
             if ($stmt->execute()) {
                 $message = "Wish submitted successfully!";
@@ -72,12 +78,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="form-floating">
-          <input type="date" class="form-control" id="floatingPosition" name="birth_date" placeholder="Birth Date" required>
-          <label for="floatingPosition">Birth Date</label>
-        </div>
-      </div>
+            <div class="col-md-6">
+    <div class="form-floating">
+        <input type="number" class="form-control" id="floatingAge" name="age" placeholder="Age" required min="1" max="120">
+        <label for="floatingAge">Age</label>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-floating">
+        <input type="date" class="form-control" id="floatingBirthDate" name="birth_date" required>
+        <label for="floatingBirthDate">Birth Date</label>
+    </div>
+</div>
+
 
       <div class="col-md-6">
         <div class="form-floating">

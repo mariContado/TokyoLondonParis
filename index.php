@@ -290,7 +290,7 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="index_admin.php?page=wish">
+            <a href="index.php?page=wish">
               <i class="bi bi-circle"></i><span>Wish Ko Lang Form</span>
             </a>
           </li>
@@ -300,7 +300,7 @@
 
       <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="index_admin.php?page=wish_list">
+            <a href="index.php?page=wish_list">
               <i class="bi bi-circle"></i><span>Wish List</span>
             </a>
           </li>
@@ -316,21 +316,21 @@
      
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index_admin.php?page=london">
+        <a class="nav-link collapsed" href="index.php?page=london">
           <i class="bi bi-envelope"></i>
           <span>LONDON</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index_admin.php?page=paris">
+        <a class="nav-link collapsed" href="index.php?page=paris">
           <i class="bi bi-card-list"></i>
           <span>PARIS</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index_admin.php?page=tokyo">
+        <a class="nav-link collapsed" href="index.php?page=tokyo">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>TOKYO</span>
         </a>
